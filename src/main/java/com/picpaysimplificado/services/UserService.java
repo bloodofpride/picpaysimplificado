@@ -24,11 +24,16 @@ public class UserService {
                 .orElseThrow(Exception::new);
     }
 
-    public User save(UserDTO userDTO) throws Exception {
+    public UserDTO save(UserDTO userDTO) throws Exception {
         validateUser(userDTO);
         User newUser = new User(userDTO);
-        userRepository.save(newUser);
-        return newUser;
+        save(newUser);
+        return new UserDTO(newUser);
+    }
+
+    public User save(User user) throws Exception {
+        userRepository.save(user);
+        return user;
     }
 
     private void validateUser(UserDTO userDTO) throws Exception {
