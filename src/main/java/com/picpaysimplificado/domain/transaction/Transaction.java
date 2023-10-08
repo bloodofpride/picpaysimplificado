@@ -20,8 +20,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "SENDER_ID")
     private User sender;
 
+    @ManyToOne
+    @JoinColumn(name = "RECEIVER_ID")
     private User receiver;
 
     private BigDecimal amount;
