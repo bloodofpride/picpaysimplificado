@@ -5,6 +5,9 @@ import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -17,6 +20,13 @@ public class UserService {
     public User findByid(Long id) throws Exception {
         return userRepository.findById(id)
                 .orElseThrow(Exception::new);
+    }
+
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
     public User findByDoc(String doc) throws Exception {
