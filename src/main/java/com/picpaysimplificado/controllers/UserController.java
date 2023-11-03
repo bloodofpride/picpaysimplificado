@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) throws Exception {
+    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
         UserDTO savedUser = userService.save(userDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
         return ResponseEntity.created(uri).body(savedUser);
